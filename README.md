@@ -280,8 +280,8 @@ B.Tech CSE (AI & DS)
 GitHub:
 https://github.com/Sahil-242-ops
 
-LinkedIn:[
-https://www.linkedin.com/in/YOUR_PROFILE](https://www.linkedin.com/in/sahil-118561320/)
+LinkedIn:
+https://www.linkedin.com/in/sahil-118561320/
 
 ---
 
