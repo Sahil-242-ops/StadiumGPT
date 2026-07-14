@@ -277,7 +277,7 @@ https://www.linkedin.com/in/sahil-118561320/
 
 ---
 
-## ⭐ Built on the basis of GenAI
+## ⭐ Built On The Basis Of GenAI
 
 Powered by
 
