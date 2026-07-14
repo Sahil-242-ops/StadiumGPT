@@ -36,3 +36,5 @@ Thumbs.db
 *.log
 logs/
 npm-debug.log*
+
+.vercel

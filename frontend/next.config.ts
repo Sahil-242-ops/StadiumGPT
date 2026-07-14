@@ -1,9 +1,8 @@
 import type { NextConfig } from 'next';
-import dotenv from 'dotenv';
-import path from 'path';
 
-// Load env vars from monorepo root
-dotenv.config({ path: path.resolve(__dirname, '..', '.env') });
+// Environment variables are loaded automatically:
+//   - Locally: Next.js reads .env.local / .env files
+//   - Vercel: set via Project Settings → Environment Variables
 
 const nextConfig: NextConfig = {
   // Expose env vars to the browser
