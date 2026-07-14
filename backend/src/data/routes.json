@@ -1,0 +1,64 @@
+{
+  "step_free_routes": {
+    "gate_A_to_section_A1": {
+      "accessible": true,
+      "steps": [
+        "Enter via Gate A (ground level)",
+        "Follow green accessible path signs straight ahead",
+        "Take elevator on your left to Level 1",
+        "Turn right at Level 1 lobby — Section A1 is 30 metres ahead"
+      ],
+      "distance_metres": 180,
+      "estimated_minutes": 4,
+      "landmarks": ["Blue information kiosk", "Accessible restroom on left", "Section A1 signage"]
+    },
+    "gate_A_to_section_B2": {
+      "accessible": true,
+      "steps": [
+        "Enter via Gate A (ground level)",
+        "Take accessible ramp to Level 1 Concourse",
+        "Follow orange wayfinding signs toward East Wing",
+        "Pass concession stand 7 on your right",
+        "Section B2 entrance is directly ahead"
+      ],
+      "distance_metres": 320,
+      "estimated_minutes": 7,
+      "landmarks": ["Accessible ramp", "Concession Stand 7", "East Wing junction"]
+    },
+    "gate_D_to_accessible_seating": {
+      "accessible": true,
+      "steps": [
+        "Enter via Gate D (designated accessible entrance)",
+        "Proceed to Elevator Bank D — wheelchair spaces on Ground Level",
+        "Level 0 accessible seating area is immediately adjacent",
+        "Companion seating is available in rows 1-3"
+      ],
+      "distance_metres": 60,
+      "estimated_minutes": 2,
+      "landmarks": ["Elevator Bank D", "Blue wheelchair symbol flooring"]
+    },
+    "gate_C_to_section_C1": {
+      "accessible": true,
+      "steps": [
+        "Enter via Gate C (ramp access from west plaza)",
+        "Keep left along the accessible corridor",
+        "Ramp leads directly to Level 1 concourse",
+        "Section C1 is 50 metres on the right"
+      ],
+      "distance_metres": 200,
+      "estimated_minutes": 5,
+      "landmarks": ["West plaza ramp", "Accessible corridor", "Section C1 sign"]
+    },
+    "any_gate_to_medical": {
+      "accessible": true,
+      "steps": [
+        "Locate the nearest steward or use the emergency intercom (red boxes at every gate)",
+        "Medical stations are at Gate A Lobby, Section B2 Concourse, and Section D1",
+        "Follow red cross signage or ask any volunteer for immediate escort"
+      ],
+      "distance_metres": 0,
+      "estimated_minutes": 2,
+      "landmarks": ["Red cross signs", "Emergency intercom boxes", "Steward stations"]
+    }
+  }
+}

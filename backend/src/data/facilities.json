@@ -1,0 +1,43 @@
+{
+  "facilities": {
+    "accessible_restrooms": {
+      "locations": ["Gate A Lobby", "Gate C West", "Gate D Lower", "Section B2 Concourse"],
+      "operating_hours": "Match day: 4 hours before kick-off to 1 hour after final whistle",
+      "features": ["Wheelchair accessible", "Baby changing", "Companion access"]
+    },
+    "medical": {
+      "locations": ["Gate A First Aid", "Section B2 Medical Centre", "Section D1 First Aid", "Pitch-side Medical"],
+      "services": ["First aid", "Emergency care", "Medication storage", "Defibrillators at every gate"],
+      "emergency": "Call 911 or use red emergency intercom at any gate"
+    },
+    "transportation": {
+      "accessible_parking": {
+        "lots": ["Lot A — Blue Badge", "Lot D — Accessible Shuttle Drop-off"],
+        "pre_booking": "Required, via FIFA Fan App or official site",
+        "shuttle": "Free accessible shuttle from Lot D every 10 minutes"
+      },
+      "public_transport": {
+        "metro": "NJ Transit direct from Penn Station (MetLife), Metro Silver Line (SoFi)",
+        "accessible_services": "All trains fully accessible; priority boarding for wheelchair users"
+      }
+    },
+    "fan_services": {
+      "lost_found": "Gate A Information Desk",
+      "prayer_quiet_room": "Gate A, Room 12 (multi-faith, non-denominational)",
+      "family_room": "Gate D Lower Level — baby changing, nursing, quiet space",
+      "sensory_kits": "Available at Gate A and Gate D — earplugs, sunglasses, fidget tools",
+      "sign_language": "BSL/ASL interpretation available; request at Gate A info desk"
+    },
+    "sustainability": {
+      "recycling_stations": "Every 50 metres on all concourses — Paper, Plastic, Compost",
+      "water_refill": "Free water refill stations at Gates A, C, D and all concourses",
+      "carbon_offset": "All shuttle buses are electric; stadium powered by 100% renewable energy"
+    },
+    "concessions": {
+      "halal": "Stands 3, 7, 12, 18 — certified Halal",
+      "kosher": "Stand 5 — certified Kosher",
+      "vegan": "Stands 2, 9, 15 — fully plant-based",
+      "allergen_free": "All stands display allergen info; ask staff for guidance"
+    }
+  }
+}

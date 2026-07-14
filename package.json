@@ -1,0 +1,24 @@
+{
+  "name": "stadiumgpt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StadiumGPT — GenAI-powered FIFA World Cup 2026 assistant",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
+    "test": "npm run test --workspace=backend",
+    "vercel-deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
