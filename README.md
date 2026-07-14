@@ -29,6 +29,32 @@ Fan Query → Intent Detection → Deterministic Rules Engine → Resolved Facts
 The **deterministic engine** resolves all facts first (routes, crowd levels, facilities). **Gemini only phrases them** in the fan's language. Gemini **cannot invent** a route or facility — it only makes the facts conversational.
 
 ---
+## 🌐 Live Demo
+
+🔗 https://stadiumgpt-phi.vercel.app/
+
+> Experience StadiumGPT live.
+
+---
+## 📸 Screenshots
+
+### Home Page
+
+![Home](images/Screenshot.png)
+
+### AI Chat
+
+![Chat](images/chat.png)
+
+### Navigation
+
+![Navigation](images/navigation.png)
+
+### Crowd Dashboard
+
+![Crowd](images/crowd.png)
+
+---
 
 ## ✨ Key Features
 
@@ -42,6 +68,20 @@ The **deterministic engine** resolves all facts first (routes, crowd levels, fac
 | 🏥 **Facility finder** | Medical, restrooms, halal/kosher/vegan food, prayer room |
 | 🚌 **Transport info** | Accessible parking, metro routes, shuttle info |
 | ♻️ **Sustainability** | Recycling stations, water refill points, eco transport |
+
+---
+## ☁️ Google Cloud Services Used
+
+| Service | Purpose |
+|---------|----------|
+| Gemini 2.5 Flash | AI Assistant |
+| Firebase Authentication | User Login |
+| Firestore | Real-time Database |
+| Google Maps Platform | Stadium Navigation |
+| Places API | Facility Search |
+| Directions API | Route Planning |
+| Cloud Run | Backend Deployment |
+| Cloud Storage | Images & Assets |
 
 ---
 
@@ -231,11 +271,29 @@ Or connect the GitHub repo to Vercel for automatic deployments on every push.
 | *+ 13 more* | *Across USA, Canada & Mexico* | — |
 
 ---
+## 👨‍💻 Developer
 
-## 📜 Licence
+**Sahil**
 
-SAHIL © 2026 StadiumGPT
+B.Tech CSE (AI & DS)
+
+GitHub:
+https://github.com/Sahil-242-ops
+
+LinkedIn:[
+https://www.linkedin.com/in/YOUR_PROFILE](https://www.linkedin.com/in/sahil-118561320/)
 
 ---
 
-*Built with ❤️ for the FIFA World Cup 2026 · Powered by Google Gemini*
+## ⭐ Built on the basis of GenAI
+
+Powered by
+
+- Google Gemini
+- Firebase
+- Google Maps Platform
+- Next.js
+- Express.js
+- TypeScript
+
+If you like this project, please ⭐ the repository.
