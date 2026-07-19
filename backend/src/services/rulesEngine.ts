@@ -10,6 +10,18 @@ import { Intent, ResolvedFact, CrowdLevel } from '../types/index.js';
 // In both cases, data/ is a sibling directory of services/
 const DATA_DIR = path.join(__dirname, '..', 'data');
 
+// ── Deterministic seeded RNG ───────────────────────────────────────────────
+// Replaces Math.random() so responses are stable within a 1-minute window.
+// Seed varies per context string (stadiumId, section, zone) + minute-bucket.
+function seededRand(seed: string): number {
+  let h = 0x9e3779b9;
+  for (let i = 0; i < seed.length; i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 0x85ebca6b);
+    h ^= h >>> 13;
+  }
+  return ((h >>> 0) / 0xffffffff);
+}
+
 function loadJson<T>(filename: string): T {
   const filePath = path.join(DATA_DIR, filename);
   return JSON.parse(fs.readFileSync(filePath, 'utf-8')) as T;
@@ -120,6 +132,10 @@ const INTENT_KEYWORDS: Record<Intent, string[]> = {
   general: [],
 };
 
+/**
+ * Detect the intent of a user message.
+ * Returns the most specific matching intent or 'general' as fallback.
+ */
 export function detectIntent(message: string): Intent {
   const lower = message.toLowerCase();
   for (const [intent, keywords] of Object.entries(INTENT_KEYWORDS) as [Intent, string[]][]) {
@@ -155,8 +171,8 @@ function resolveNavigation(
   if (!route) {
     const accessible = stepFree || gate === 'A' || gate === 'C' || gate === 'D';
     const levelNum = section.startsWith('A') ? '1' : section.startsWith('B') ? '2' : '3';
-    const estimated_minutes = Math.floor(Math.random() * 5) + 4;
-    const distance_metres = estimated_minutes * 60 + Math.floor(Math.random() * 40);
+    const estimated_minutes = Math.floor(seededRand(`${gate}${section}min`) * 5) + 4;
+    const distance_metres = estimated_minutes * 60 + Math.floor(seededRand(`${gate}${section}dist`) * 40);
 
     const steps = stepFree
       ? [
@@ -239,7 +255,8 @@ function resolveCrowd(
     { zone: 'VIP Lounge',   base: isMatchTime ? 45 : 20 },
     { zone: 'Concourse A',  base: isMatchTime ? 88 : 50 },
   ].map(({ zone, base }) => {
-    const pct = Math.min(100, base + Math.floor(Math.random() * 10));
+    const seed = `${zone}${Math.floor(Date.now() / 60000)}`;
+    const pct = Math.min(100, base + Math.floor(seededRand(seed) * 10));
     const level: CrowdLevel =
       pct >= 85 ? 'critical' : pct >= 70 ? 'high' : pct >= 45 ? 'moderate' : 'low';
     const gates: Record<CrowdLevel, string> = {
@@ -329,7 +346,7 @@ function resolveTransport(): Record<string, unknown> {
   };
 }
 
-function resolveEmergency(message: string): Record<string, unknown> {
+function resolveEmergency(): Record<string, unknown> {
   const { facilities } = getFacilities();
   return {
     action: 'Contact nearest steward immediately or call 911',
@@ -350,6 +367,10 @@ function resolveSustainability(): Record<string, unknown> {
 
 // ── Main resolver ──────────────────────────────────────────────────────────
 
+/**
+ * Main fact resolver — takes a raw user message and returns structured facts
+ * that can be phrased by the Gemini client.
+ */
 export function resolve(
   message: string,
   stadiumId = 'met_life',
@@ -386,7 +407,7 @@ export function resolve(
     case 'transport':
       return { intent, facts: resolveTransport(), urgency: 'normal' };
     case 'emergency':
-      return { intent, facts: resolveEmergency(message), urgency: 'emergency' };
+      return { intent, facts: resolveEmergency(), urgency: 'emergency' };
     case 'sustainability':
       return { intent, facts: resolveSustainability(), urgency: 'normal' };
     default:

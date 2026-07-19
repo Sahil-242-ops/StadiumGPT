@@ -13,6 +13,10 @@ const NavigateSchema = z.object({
   language:   z.enum(['en', 'es', 'fr', 'hi']).default('en'),
 });
 
+/**
+ * POST /api/navigate
+ * Returns a structured step-by-step route from a gate to a section.
+ */
 export async function navigateController(req: Request, res: Response): Promise<void> {
   const parsed = NavigateSchema.safeParse(req.body);
   if (!parsed.success) {
@@ -38,22 +42,27 @@ export async function navigateController(req: Request, res: Response): Promise<v
     return;
   }
 
-  const gemini = getGeminiClient();
-  const narrative = await gemini.phraseFacts(
-    fact,
-    language as Language,
-    `How do I get from Gate ${from_gate} to Section ${to_section}?`
-  );
+  try {
+    const gemini = getGeminiClient();
+    const narrative = await gemini.phraseFacts(
+      fact,
+      language as Language,
+      `How do I get from Gate ${from_gate} to Section ${to_section}?`
+    );
 
-  res.json({
-    route_id: `${from_gate.toLowerCase()}_to_${to_section.toLowerCase()}`,
-    from_gate,
-    to_section,
-    accessible: navFacts.accessible,
-    steps: (navFacts.route_steps ?? []).map((instruction) => ({ instruction, accessible: navFacts.accessible })),
-    distance_metres: navFacts.distance_metres,
-    estimated_minutes: navFacts.estimated_minutes,
-    gemini_narrative: narrative,
-    language,
-  });
+    res.json({
+      route_id: `${from_gate.toLowerCase()}_to_${to_section.toLowerCase()}`,
+      from_gate,
+      to_section,
+      accessible: navFacts.accessible,
+      steps: (navFacts.route_steps ?? []).map((instruction) => ({ instruction, accessible: navFacts.accessible })),
+      distance_metres: navFacts.distance_metres,
+      estimated_minutes: navFacts.estimated_minutes,
+      gemini_narrative: narrative,
+      language,
+    });
+  } catch (err) {
+    console.error('Navigate controller error:', err);
+    res.status(500).json({ error: 'An unexpected error occurred while generating navigation instructions.' });
+  }
 }

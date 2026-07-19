@@ -10,14 +10,19 @@ const INSIGHT_POOL = [
   { title: 'Metro arriving', description: 'Next accessible metro arrives in 4 minutes at Platform 2.', action: 'Head to Platform 2', confidence_pct: 99, savings_minutes: 10, icon: '🚇' },
 ];
 
-let insightIdx = 0;
-
+/**
+ * GET /api/insights
+ * Returns a rotating proactive insight from the pool.
+ * Uses the current minute to cycle through insights deterministically
+ * rather than mutable module-level state.
+ */
 export async function insightsController(_req: Request, res: Response): Promise<void> {
-  const insight = INSIGHT_POOL[insightIdx % INSIGHT_POOL.length];
-  insightIdx++;
+  const idx = Math.floor(Date.now() / 30000) % INSIGHT_POOL.length; // rotates every 30 s
+  const insight = INSIGHT_POOL[idx];
 
   res.json({
     id: `insight_${Date.now()}`,
     ...insight,
   });
 }
+

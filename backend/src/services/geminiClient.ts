@@ -162,8 +162,131 @@ class GeminiClient {
   }
 
   private fallback(fact: ResolvedFact, language: Language): string {
+    // Try to build a rich response from the actual facts first
+    const rich = this.buildRichFallback(fact, language);
+    if (rich) return rich;
+    // Last resort: generic one-liner
     const langMap = FALLBACKS[language] ?? FALLBACKS.en;
     return langMap[fact.intent] ?? langMap.general;
+  }
+
+  /** Build a detailed fallback response using the resolved facts. */
+  private buildRichFallback(fact: ResolvedFact, language: Language): string | null {
+    if (Object.keys(fact.facts).length === 0) return null;
+    const f = fact.facts;
+
+    // English only for rich fallback (other languages use the pre-written fallbacks)
+    if (language !== 'en') return null;
+
+    switch (fact.intent) {
+      case 'facility': {
+        const type = f['type'] as string | undefined;
+        if (type === 'restroom' || type === 'accessible_restrooms') {
+          const locs = f['locations'] as string | undefined;
+          const feats = f['features'] as string | undefined;
+          const hours = f['operating_hours'] as string | undefined;
+          let msg = 'Accessible restrooms are located at: ';
+          if (locs) msg += locs + '. ';
+          if (feats) msg += 'Features: ' + feats + '. ';
+          if (hours) msg += 'Open ' + hours + '.';
+          return msg;
+        }
+        if (type === 'medical') {
+          const locs = f['locations'] as string | undefined;
+          const services = f['services'] as string | undefined;
+          let msg = 'Medical facilities at: ';
+          if (locs) msg += locs + '. ';
+          if (services) msg += 'Services: ' + services + '.';
+          return msg;
+        }
+        if (type === 'concessions') {
+          const halal = f['halal'] as string | undefined;
+          const kosher = f['kosher'] as string | undefined;
+          const vegan = f['vegan'] as string | undefined;
+          const parts: string[] = [];
+          if (halal) parts.push('Halal: ' + halal);
+          if (kosher) parts.push('Kosher: ' + kosher);
+          if (vegan) parts.push('Vegan: ' + vegan);
+          return parts.length ? parts.join('. ') + '.' : null;
+        }
+        if (type === 'prayer_quiet_room') {
+          const loc = f['location'] as string | undefined;
+          if (loc) return `The multi-faith prayer and quiet room is at ${loc}.`;
+        }
+        if (type === 'lost_and_found') {
+          const loc = f['location'] as string | undefined;
+          if (loc) return `Lost & Found is at ${loc}. Please ask a steward for help.`;
+        }
+        if (type === 'family_room') {
+          const loc = f['location'] as string | undefined;
+          if (loc) return `The Family Room (baby changing, nursing, quiet space) is at ${loc}.`;
+        }
+        if (type === 'general_facilities') {
+          const med = f['medical'] as string | undefined;
+          const wc = f['restrooms'] as string | undefined;
+          const lf = f['lost_found'] as string | undefined;
+          const parts: string[] = [];
+          if (wc) parts.push('Restrooms: ' + wc);
+          if (med) parts.push('Medical: ' + med);
+          if (lf) parts.push('Lost & Found: ' + lf);
+          return parts.length ? parts.join('. ') + '.' : null;
+        }
+        return null;
+      }
+
+      case 'navigate': {
+        const steps = f['route_steps'] as Array<{instruction: string; accessible: boolean}> | undefined;
+        const dist = f['distance_metres'] as number | undefined;
+        const mins = f['estimated_minutes'] as number | undefined;
+        const gate = f['gate'] as string | undefined;
+        const section = f['section'] as string | undefined;
+        if (!steps?.length) return null;
+        let msg = gate && section ? `Directions from Gate ${gate} to Section ${section}: ` : '';
+        msg += steps.map((s, i) => `${i + 1}. ${s.instruction}`).join(' ');
+        if (dist && mins) msg += ` Walk is approximately ${dist}m (~${mins} min).`;
+        return msg;
+      }
+
+      case 'accessibility': {
+        const gates = f['step_free_gates'] as string | undefined;
+        const restrooms = f['accessible_restrooms'] as string | undefined;
+        const elevator = f['elevator_info'] as string | undefined;
+        const parts: string[] = [];
+        if (gates) parts.push('Step-free gates: ' + gates);
+        if (restrooms) parts.push('Accessible restrooms at: ' + restrooms);
+        if (elevator) parts.push(elevator);
+        return parts.length ? parts.join('. ') + '.' : null;
+      }
+
+      case 'transport': {
+        const parking = f['accessible_parking_lots'] as string | undefined;
+        const metro = f['metro'] as string | undefined;
+        const shuttle = f['shuttle'] as string | undefined;
+        const parts: string[] = [];
+        if (metro) parts.push('Metro: ' + metro);
+        if (parking) parts.push('Accessible parking: ' + parking);
+        if (shuttle) parts.push(shuttle);
+        return parts.length ? parts.join('. ') + '.' : null;
+      }
+
+      case 'sustainability': {
+        const recycling = f['recycling'] as string | undefined;
+        const water = f['water_refill'] as string | undefined;
+        const carbon = f['carbon_offset'] as string | undefined;
+        const parts: string[] = [];
+        if (recycling) parts.push(recycling);
+        if (water) parts.push(water);
+        if (carbon) parts.push(carbon);
+        return parts.length ? parts.join(' ') : null;
+      }
+
+      case 'emergency':
+        return 'EMERGENCY: Please contact the nearest steward immediately, or call 911. ' +
+               'Red emergency intercoms are available at every gate.';
+
+      default:
+        return null;
+    }
   }
 }
 

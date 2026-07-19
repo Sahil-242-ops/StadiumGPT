@@ -1,6 +1,7 @@
 // StadiumGPT — SOS controller
 import { Request, Response } from 'express';
 import { z } from 'zod';
+import { randomUUID } from 'crypto';
 
 const SOSSchema = z.object({
   type: z.enum(['medical', 'lost_child', 'security', 'fire', 'general']),
@@ -17,8 +18,11 @@ const RESPONDERS: Record<string, { responder: string; eta: number; msg: string }
   general:    { responder: 'Guest Services',        eta: 5,  msg: 'A guest services representative has been notified and will assist you shortly.' },
 };
 
-let sosCounter = 0;
-
+/**
+ * POST /api/sos
+ * Dispatches an emergency responder and returns an incident ID with ETA.
+ * Uses crypto.randomUUID() for globally unique, stateless incident IDs.
+ */
 export async function sosController(req: Request, res: Response): Promise<void> {
   const parsed = SOSSchema.safeParse(req.body);
   if (!parsed.success) {
@@ -29,8 +33,7 @@ export async function sosController(req: Request, res: Response): Promise<void> 
   const { type, location, description } = parsed.data;
   const info = RESPONDERS[type] ?? RESPONDERS.general;
 
-  sosCounter++;
-  const id = `SOS-${Date.now()}-${sosCounter}`;
+  const id = `SOS-${randomUUID()}`;
 
   console.warn(`🚨 SOS ALERT [${id}] Type: ${type} | Location: ${location} | Desc: ${description ?? 'none'}`);
 
@@ -44,3 +47,4 @@ export async function sosController(req: Request, res: Response): Promise<void> 
     responder: info.responder,
   });
 }
+

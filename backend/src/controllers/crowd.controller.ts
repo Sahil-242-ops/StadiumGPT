@@ -2,12 +2,32 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
 import { resolveCrowd } from '../services/rulesEngine.js';
-import { getGeminiClient } from '../services/geminiClient.js';
 
 const CrowdSchema = z.object({
   stadium_id: z.string().default('met_life'),
   section:    z.string().optional(),
 });
+
+/** Build a readable crowd summary directly from structured data — no Gemini needed. */
+function buildCrowdSummary(crowdFacts: ReturnType<typeof resolveCrowd>): string {
+  const level = crowdFacts.overall_level;
+  const busyZones = crowdFacts.zones.filter((z) => z.level === 'high' || z.level === 'critical');
+  const bestZone = crowdFacts.zones.reduce((a, b) => (a.occupancy_pct < b.occupancy_pct ? a : b));
+
+  const levelMsg =
+    level === 'low'      ? 'Crowd levels are low — enjoy easy access to all areas.' :
+    level === 'moderate' ? 'Crowd levels are moderate — some queues at popular gates.' :
+    level === 'high'     ? 'Crowd levels are high — expect delays at busy entrances.' :
+                           'Crowd levels are critical — please follow steward guidance.';
+
+  const busyMsg = busyZones.length > 0
+    ? ` Avoid ${busyZones.map((z) => z.zone).join(' and ')} if possible.`
+    : '';
+
+  const bestMsg = ` Least congested: ${bestZone.zone} (${bestZone.occupancy_pct}%) — use Gate ${bestZone.recommended_gate}.`;
+
+  return levelMsg + busyMsg + bestMsg;
+}
 
 export async function crowdController(req: Request, res: Response): Promise<void> {
   const parsed = CrowdSchema.safeParse(req.body);
@@ -18,8 +38,7 @@ export async function crowdController(req: Request, res: Response): Promise<void
 
   const { stadium_id, section } = parsed.data;
   const crowdFacts = resolveCrowd(stadium_id, section);
-  const gemini = getGeminiClient();
-  const summary = await gemini.summariseCrowd(crowdFacts as Record<string, unknown>, 'en');
+  const summary = buildCrowdSummary(crowdFacts);
 
   res.json({
     stadium_id,

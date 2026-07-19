@@ -1,7 +1,8 @@
 // StadiumGPT — Rate limiting middleware (sliding window per IP)
 import rateLimit from 'express-rate-limit';
 
-const maxRequests = parseInt(process.env.RATE_LIMIT_REQUESTS ?? '30', 10);
+const isTest = process.env.NODE_ENV === 'test';
+const maxRequests = isTest ? 10000 : parseInt(process.env.RATE_LIMIT_REQUESTS ?? '30', 10);
 const windowSecs = parseInt(process.env.RATE_LIMIT_WINDOW_SECONDS ?? '60', 10);
 
 export const rateLimitMiddleware = rateLimit({

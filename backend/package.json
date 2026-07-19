@@ -10,7 +10,8 @@
     "copy-data": "node -e \"const fs=require('fs');const p=require('path');const src=p.join('src','data');const dst=p.join('dist','src','data');fs.mkdirSync(dst,{recursive:true});fs.readdirSync(src).forEach(f=>fs.copyFileSync(p.join(src,f),p.join(dst,f)));console.log('Data files copied to dist/src/data/')\"",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
-    "test": "jest --passWithNoTests"
+    "test": "jest --coverage",
+    "test:ci": "jest --coverage --ci --forceExit"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -24,7 +25,12 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.14.2",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.5",
     "tsx": "^4.15.2",
     "typescript": "^5.4.5"
   },
