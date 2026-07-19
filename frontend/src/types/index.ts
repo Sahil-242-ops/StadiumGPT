@@ -1,15 +1,24 @@
 // StadiumGPT — TypeScript types for the frontend
-export type Language = 'en' | 'es' | 'fr' | 'de' | 'ja' | 'hi';
-export type Intent = 'navigate' | 'accessibility' | 'crowd' | 'facility' | 'transport' | 'emergency' | 'sustainability' | 'general';
-export type CrowdLevel = 'low' | 'moderate' | 'high' | 'critical';
-export type Urgency = 'normal' | 'high' | 'emergency';
-export type SOSType = 'medical' | 'lost_child' | 'security' | 'fire' | 'general';
+export type Language = "en" | "es" | "fr" | "de" | "ja" | "hi";
+export type Intent =
+  | "navigate"
+  | "accessibility"
+  | "crowd"
+  | "facility"
+  | "transport"
+  | "emergency"
+  | "sustainability"
+  | "general";
+export type CrowdLevel = "low" | "moderate" | "high" | "critical";
+export type Urgency = "normal" | "high" | "emergency";
+export type SOSType =
+  "medical" | "lost_child" | "security" | "fire" | "general";
 
 // ── Chat ───────────────────────────────────────────────────────────────────
 
 export interface ChatMessage {
   id: string;
-  role: 'bot' | 'user';
+  role: "bot" | "user";
   text: string;
   intent?: Intent;
   urgency?: Urgency;
@@ -18,7 +27,14 @@ export interface ChatMessage {
   timestamp: Date;
 }
 
-export type CardType = 'text' | 'route' | 'facility' | 'crowd' | 'emergency' | 'transport' | 'sustainability';
+export type CardType =
+  | "text"
+  | "route"
+  | "facility"
+  | "crowd"
+  | "emergency"
+  | "transport"
+  | "sustainability";
 
 export interface ChatResponse {
   message: string;
@@ -79,7 +95,7 @@ export interface SOSRequest {
 
 export interface SOSResponse {
   id: string;
-  status: 'dispatched';
+  status: "dispatched";
   type: SOSType;
   location: string;
   eta_minutes: number;
@@ -116,7 +132,15 @@ export interface AIInsight {
 
 export interface MapPOI {
   id: string;
-  type: 'restroom' | 'medical' | 'food' | 'parking' | 'gate' | 'seat' | 'prayer' | 'info';
+  type:
+    | "restroom"
+    | "medical"
+    | "food"
+    | "parking"
+    | "gate"
+    | "seat"
+    | "prayer"
+    | "info";
   label: string;
   x: number; // SVG coordinate %
   y: number;
@@ -128,7 +152,8 @@ export interface MapPOI {
 
 export interface Notification {
   id: string;
-  type: 'gate_change' | 'weather' | 'traffic' | 'food_offer' | 'security' | 'info';
+  type:
+    "gate_change" | "weather" | "traffic" | "food_offer" | "security" | "info";
   title: string;
   message: string;
   timestamp: Date;

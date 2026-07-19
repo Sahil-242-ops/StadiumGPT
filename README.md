@@ -16,7 +16,7 @@
 
 StadiumGPT is a production-grade GenAI assistant that transforms the fan experience at FIFA World Cup 2026 venues. Arriving at a packed stadium of 80,000+ fans, a fan can simply ask in their own language:
 
-> *"What's the nearest step-free route to my seat?"*
+> _"What's the nearest step-free route to my seat?"_
 
 StadiumGPT answers — **grounded, accurate, and inclusive** — without ever inventing a facility.
 
@@ -29,6 +29,7 @@ Fan Query → Intent Detection → Deterministic Rules Engine → Resolved Facts
 The **deterministic engine** resolves all facts first (routes, crowd levels, facilities). **Gemini only phrases them** in the fan's language. Gemini **cannot invent** a route or facility — it only makes the facts conversational.
 
 ---
+
 ## 🌐 Live Demo
 
 🔗 https://stadiumgpt-phi.vercel.app/
@@ -36,6 +37,7 @@ The **deterministic engine** resolves all facts first (routes, crowd levels, fac
 > Experience StadiumGPT live.
 
 ---
+
 ## 📸 Screenshots
 
 ### Home Page
@@ -50,30 +52,31 @@ The **deterministic engine** resolves all facts first (routes, crowd levels, fac
 
 ## ✨ Key Features
 
-| Feature | Detail |
-|---|---|
-| 🌍 **Multilingual** | English, Spanish & French — all WC26 host languages |
-| ♿ **Accessibility-first** | WCAG 2.1 AA, step-free routing, screen-reader mode |
-| 📊 **Real-time crowd guidance** | Live crowd levels with gate recommendations |
-| 🗺️ **Smart navigation** | Step-by-step routes with distance & time estimates |
-| 🔒 **Secure by design** | Input validation, prompt-injection defence, rate limiting |
-| 🏥 **Facility finder** | Medical, restrooms, halal/kosher/vegan food, prayer room |
-| 🚌 **Transport info** | Accessible parking, metro routes, shuttle info |
-| ♻️ **Sustainability** | Recycling stations, water refill points, eco transport |
+| Feature                         | Detail                                                    |
+| ------------------------------- | --------------------------------------------------------- |
+| 🌍 **Multilingual**             | English, Spanish & French — all WC26 host languages       |
+| ♿ **Accessibility-first**      | WCAG 2.1 AA, step-free routing, screen-reader mode        |
+| 📊 **Real-time crowd guidance** | Live crowd levels with gate recommendations               |
+| 🗺️ **Smart navigation**         | Step-by-step routes with distance & time estimates        |
+| 🔒 **Secure by design**         | Input validation, prompt-injection defence, rate limiting |
+| 🏥 **Facility finder**          | Medical, restrooms, halal/kosher/vegan food, prayer room  |
+| 🚌 **Transport info**           | Accessible parking, metro routes, shuttle info            |
+| ♻️ **Sustainability**           | Recycling stations, water refill points, eco transport    |
 
 ---
+
 ## ☁️ Google Cloud Services Used
 
-| Service | Purpose |
-|---------|----------|
-| Gemini 2.5 Flash | AI Assistant |
-| Firebase Authentication | User Login |
-| Firestore | Real-time Database |
-| Google Maps Platform | Stadium Navigation |
-| Places API | Facility Search |
-| Directions API | Route Planning |
-| Cloud Run | Backend Deployment |
-| Cloud Storage | Images & Assets |
+| Service                 | Purpose            |
+| ----------------------- | ------------------ |
+| Gemini 2.5 Flash        | AI Assistant       |
+| Firebase Authentication | User Login         |
+| Firestore               | Real-time Database |
+| Google Maps Platform    | Stadium Navigation |
+| Places API              | Facility Search    |
+| Directions API          | Route Planning     |
+| Cloud Run               | Backend Deployment |
+| Cloud Storage           | Images & Assets    |
 
 ---
 
@@ -187,6 +190,7 @@ StadiumGPT/
 ## 📡 API Reference
 
 ### `POST /api/chat`
+
 Main fan query endpoint.
 
 ```json
@@ -199,15 +203,19 @@ Main fan query endpoint.
 ```
 
 ### `POST /api/navigate`
+
 Step-free route planning.
 
 ### `POST /api/crowd`
+
 Live crowd density data.
 
 ### `POST /api/sos`
+
 Emergency assistance.
 
 ### `GET /health`
+
 Health check — returns Gemini availability status.
 
 ---
@@ -225,6 +233,7 @@ vercel --prod
 Or connect the GitHub repo to Vercel for automatic deployments on every push.
 
 **Environment variables to set in Vercel dashboard:**
+
 - `GEMINI_API_KEY` — your Google Gemini API key
 - `GEMINI_MODEL` — `gemini-2.5-flash` (default)
 - `NEXT_PUBLIC_API_URL` — your backend URL
@@ -233,36 +242,37 @@ Or connect the GitHub repo to Vercel for automatic deployments on every push.
 
 ## 🔒 Security Design
 
-| Layer | Mechanism |
-|---|---|
-| Input validation | Zod schemas, length limits |
-| Prompt injection | Pattern filters (ignore previous, act as, jailbreak, XSS, etc.) |
-| Rate limiting | Sliding-window per-IP: 30 req/60s |
-| LLM hallucination | Rules-before-LLM — Gemini never resolves facts |
-| API safety | Gemini safety settings on all categories |
+| Layer             | Mechanism                                                       |
+| ----------------- | --------------------------------------------------------------- |
+| Input validation  | Zod schemas, length limits                                      |
+| Prompt injection  | Pattern filters (ignore previous, act as, jailbreak, XSS, etc.) |
+| Rate limiting     | Sliding-window per-IP: 30 req/60s                               |
+| LLM hallucination | Rules-before-LLM — Gemini never resolves facts                  |
+| API safety        | Gemini safety settings on all categories                        |
 
 ---
 
 ## 🌍 Supported Languages
 
-| Code | Language | UI | AI Responses |
-|---|---|---|---|
-| `en` | English 🇺🇸 | ✅ | ✅ |
-| `es` | Español 🇪🇸 | ✅ | ✅ |
-| `fr` | Français 🇫🇷 | ✅ | ✅ |
+| Code | Language    | UI  | AI Responses |
+| ---- | ----------- | --- | ------------ |
+| `en` | English 🇺🇸  | ✅  | ✅           |
+| `es` | Español 🇪🇸  | ✅  | ✅           |
+| `fr` | Français 🇫🇷 | ✅  | ✅           |
 
 ---
 
 ## 🏟️ Supported Venues (WC26)
 
-| Venue | City | Capacity |
-|---|---|---|
-| MetLife Stadium | East Rutherford, NJ | 82,500 |
-| SoFi Stadium | Inglewood, CA | 70,240 |
-| AT&T Stadium | Arlington, TX | 80,000 |
-| *+ 13 more* | *Across USA, Canada & Mexico* | — |
+| Venue           | City                          | Capacity |
+| --------------- | ----------------------------- | -------- |
+| MetLife Stadium | East Rutherford, NJ           | 82,500   |
+| SoFi Stadium    | Inglewood, CA                 | 70,240   |
+| AT&T Stadium    | Arlington, TX                 | 80,000   |
+| _+ 13 more_     | _Across USA, Canada & Mexico_ | —        |
 
 ---
+
 ## 👨‍💻 Developer
 
 **Sahil**

@@ -10,6 +10,7 @@
     "copy-data": "node -e \"const fs=require('fs');const p=require('path');const src=p.join('src','data');const dst=p.join('dist','src','data');fs.mkdirSync(dst,{recursive:true});fs.readdirSync(src).forEach(f=>fs.copyFileSync(p.join(src,f),p.join(dst,f)));console.log('Data files copied to dist/src/data/')\"",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
     "test": "jest --coverage",
     "test:ci": "jest --coverage --ci --forceExit"
   },

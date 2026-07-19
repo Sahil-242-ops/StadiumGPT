@@ -14,9 +14,9 @@ CRITICAL RULES — you MUST follow these without exception:
 8. Keep responses under 150 words unless it is a multi-step navigation route.`;
 
 export const LANGUAGE_NAMES: Record<string, string> = {
-  en: 'English',
-  es: 'Spanish (Español)',
-  fr: 'French (Français)',
+  en: "English",
+  es: "Spanish (Español)",
+  fr: "French (Français)",
 };
 
 export function buildFactsPrompt(params: {
@@ -61,33 +61,51 @@ Give a concise crowd status update and recommend the best gates to use, in ${lan
 
 export const FALLBACK_RESPONSES: Record<string, Record<string, string>> = {
   en: {
-    navigate:      'Please follow the green accessible path signs and take the elevator to your level.',
-    accessibility: 'Accessible routes are available via Gate A and Gate D. Please ask a steward.',
-    crowd:         'Please check with stewards for the least congested route.',
-    facility:      'Please visit the Gate A information desk for assistance.',
-    transport:     'Accessible transport is available. Please check with Gate A information desk.',
-    emergency:     'EMERGENCY: Contact the nearest steward or call 911 immediately.',
-    sustainability:'Recycling stations are available every 50 metres on all concourses.',
-    general:       'Welcome to StadiumGPT! Visit Gate A information desk for any assistance.',
+    navigate:
+      "Please follow the green accessible path signs and take the elevator to your level.",
+    accessibility:
+      "Accessible routes are available via Gate A and Gate D. Please ask a steward.",
+    crowd: "Please check with stewards for the least congested route.",
+    facility: "Please visit the Gate A information desk for assistance.",
+    transport:
+      "Accessible transport is available. Please check with Gate A information desk.",
+    emergency:
+      "EMERGENCY: Contact the nearest steward or call 911 immediately.",
+    sustainability:
+      "Recycling stations are available every 50 metres on all concourses.",
+    general:
+      "Welcome to StadiumGPT! Visit Gate A information desk for any assistance.",
   },
   es: {
-    navigate:      'Por favor, siga las señales de ruta accesible verde y tome el ascensor.',
-    accessibility: 'Las rutas accesibles están disponibles por las Puertas A y D.',
-    crowd:         'Por favor, consulte con los guardias para la ruta menos congestionada.',
-    facility:      'Por favor, visite el mostrador de información en la Puerta A.',
-    transport:     'El transporte accesible está disponible. Consulte en la Puerta A.',
-    emergency:     'EMERGENCIA: Contacte al guardia más cercano o llame al 911 de inmediato.',
-    sustainability:'Hay estaciones de reciclaje cada 50 metros en todas las concesiones.',
-    general:       '¡Bienvenido a StadiumGPT! Visita el mostrador en la Puerta A.',
+    navigate:
+      "Por favor, siga las señales de ruta accesible verde y tome el ascensor.",
+    accessibility:
+      "Las rutas accesibles están disponibles por las Puertas A y D.",
+    crowd:
+      "Por favor, consulte con los guardias para la ruta menos congestionada.",
+    facility: "Por favor, visite el mostrador de información en la Puerta A.",
+    transport:
+      "El transporte accesible está disponible. Consulte en la Puerta A.",
+    emergency:
+      "EMERGENCIA: Contacte al guardia más cercano o llame al 911 de inmediato.",
+    sustainability:
+      "Hay estaciones de reciclaje cada 50 metros en todas las concesiones.",
+    general: "¡Bienvenido a StadiumGPT! Visita el mostrador en la Puerta A.",
   },
   fr: {
-    navigate:      "Veuillez suivre les panneaux verts d'accès et prendre l'ascenseur.",
-    accessibility: 'Les itinéraires accessibles sont disponibles via les Portes A et D.',
-    crowd:         "Veuillez consulter les stewards pour l'itinéraire le moins encombré.",
-    facility:      "Veuillez visiter le bureau d'information à la Porte A.",
-    transport:     'Transport accessible disponible. Renseignez-vous à la Porte A.',
-    emergency:     "URGENCE : Contactez le steward le plus proche ou appelez le 911 immédiatement.",
-    sustainability:'Des stations de recyclage sont disponibles tous les 50 mètres.',
-    general:       "Bienvenue sur StadiumGPT ! Visitez le bureau d'information à la Porte A.",
+    navigate:
+      "Veuillez suivre les panneaux verts d'accès et prendre l'ascenseur.",
+    accessibility:
+      "Les itinéraires accessibles sont disponibles via les Portes A et D.",
+    crowd:
+      "Veuillez consulter les stewards pour l'itinéraire le moins encombré.",
+    facility: "Veuillez visiter le bureau d'information à la Porte A.",
+    transport: "Transport accessible disponible. Renseignez-vous à la Porte A.",
+    emergency:
+      "URGENCE : Contactez le steward le plus proche ou appelez le 911 immédiatement.",
+    sustainability:
+      "Des stations de recyclage sont disponibles tous les 50 mètres.",
+    general:
+      "Bienvenue sur StadiumGPT ! Visitez le bureau d'information à la Porte A.",
   },
 };

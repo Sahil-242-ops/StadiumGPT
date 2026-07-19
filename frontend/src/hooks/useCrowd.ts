@@ -1,8 +1,8 @@
 // StadiumGPT — useCrowd hook
 // Fetches and manages live crowd data with auto-refresh
-import { useState, useCallback, useEffect } from 'react';
-import { CrowdZone, CrowdLevel } from '@/types';
-import { crowdService } from '@/services/crowd.service';
+import { useState, useCallback, useEffect } from "react";
+import { CrowdZone, CrowdLevel } from "@/types";
+import { crowdService } from "@/services/crowd.service";
 
 interface UseCrowdOptions {
   stadiumId: string;
@@ -20,8 +20,8 @@ interface CrowdState {
 export function useCrowd({ stadiumId, autoRefreshMs = 0 }: UseCrowdOptions) {
   const [state, setState] = useState<CrowdState>({
     zones: [],
-    overall: 'moderate',
-    summary: '',
+    overall: "moderate",
+    summary: "",
     loading: false,
     lastUpdated: null,
   });
@@ -43,7 +43,9 @@ export function useCrowd({ stadiumId, autoRefreshMs = 0 }: UseCrowdOptions) {
   }, [stadiumId]);
 
   // Initial fetch on mount / stadiumId change
-  useEffect(() => { void fetch(); }, [fetch]);
+  useEffect(() => {
+    void fetch();
+  }, [fetch]);
 
   // Auto-refresh
   useEffect(() => {

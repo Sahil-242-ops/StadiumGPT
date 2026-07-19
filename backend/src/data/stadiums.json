@@ -6,16 +6,45 @@
       "city": "East Rutherford, NJ",
       "country": "USA",
       "capacity": 82500,
-      "sections": ["A1","A2","A3","B1","B2","B3","C1","C2","C3","D1","D2","D3","VIP","PRESS","ACCESSIBLE"],
+      "sections": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "D1",
+        "D2",
+        "D3",
+        "VIP",
+        "PRESS",
+        "ACCESSIBLE"
+      ],
       "gates": {
-        "A": {"step_free": true,  "description": "Main entrance, ground level"},
-        "B": {"step_free": false, "description": "East entrance, 12 steps"},
-        "C": {"step_free": true,  "description": "West entrance, ramp access"},
-        "D": {"step_free": true,  "description": "Accessible entrance, elevator lobby"},
-        "E": {"step_free": false, "description": "North entrance, escalator only"}
+        "A": {
+          "step_free": true,
+          "description": "Main entrance, ground level"
+        },
+        "B": { "step_free": false, "description": "East entrance, 12 steps" },
+        "C": { "step_free": true, "description": "West entrance, ramp access" },
+        "D": {
+          "step_free": true,
+          "description": "Accessible entrance, elevator lobby"
+        },
+        "E": {
+          "step_free": false,
+          "description": "North entrance, escalator only"
+        }
       },
       "facilities": {
-        "medical": ["Gate A Lobby", "Section B2 Concourse", "Section D1 First Aid"],
+        "medical": [
+          "Gate A Lobby",
+          "Section B2 Concourse",
+          "Section D1 First Aid"
+        ],
         "restrooms": ["Every concourse level, sections A-D"],
         "accessible_restrooms": ["Gate A Lobby", "Gate C West", "Gate D Lower"],
         "concessions": ["Concourse Level 1", "Concourse Level 2", "VIP Lounge"],
@@ -30,12 +59,28 @@
       "city": "Inglewood, CA",
       "country": "USA",
       "capacity": 70240,
-      "sections": ["A1","A2","A3","B1","B2","B3","C1","C2","C3","VIP","PRESS","ACCESSIBLE"],
+      "sections": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "VIP",
+        "PRESS",
+        "ACCESSIBLE"
+      ],
       "gates": {
-        "A": {"step_free": true,  "description": "Main entrance, plaza level"},
-        "B": {"step_free": true,  "description": "South entrance, accessible"},
-        "C": {"step_free": false, "description": "North entrance, stairs only"},
-        "D": {"step_free": true,  "description": "East accessible gate"}
+        "A": { "step_free": true, "description": "Main entrance, plaza level" },
+        "B": { "step_free": true, "description": "South entrance, accessible" },
+        "C": {
+          "step_free": false,
+          "description": "North entrance, stairs only"
+        },
+        "D": { "step_free": true, "description": "East accessible gate" }
       },
       "facilities": {
         "medical": ["Gate A", "Section B2", "Field Level"],
@@ -53,12 +98,25 @@
       "city": "Arlington, TX",
       "country": "USA",
       "capacity": 80000,
-      "sections": ["A1","A2","A3","B1","B2","B3","C1","C2","C3","VIP","PRESS","ACCESSIBLE"],
+      "sections": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3",
+        "C1",
+        "C2",
+        "C3",
+        "VIP",
+        "PRESS",
+        "ACCESSIBLE"
+      ],
       "gates": {
-        "A": {"step_free": true,  "description": "Main entrance"},
-        "B": {"step_free": true,  "description": "North accessible gate"},
-        "C": {"step_free": false, "description": "South steps entrance"},
-        "D": {"step_free": true,  "description": "East ramp access"}
+        "A": { "step_free": true, "description": "Main entrance" },
+        "B": { "step_free": true, "description": "North accessible gate" },
+        "C": { "step_free": false, "description": "South steps entrance" },
+        "D": { "step_free": true, "description": "East ramp access" }
       },
       "facilities": {
         "medical": ["Gate A Lobby", "Midfield Medical"],

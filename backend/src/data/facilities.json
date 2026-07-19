@@ -1,13 +1,28 @@
 {
   "facilities": {
     "accessible_restrooms": {
-      "locations": ["Gate A Lobby", "Gate C West", "Gate D Lower", "Section B2 Concourse"],
+      "locations": [
+        "Gate A Lobby",
+        "Gate C West",
+        "Gate D Lower",
+        "Section B2 Concourse"
+      ],
       "operating_hours": "Match day: 4 hours before kick-off to 1 hour after final whistle",
       "features": ["Wheelchair accessible", "Baby changing", "Companion access"]
     },
     "medical": {
-      "locations": ["Gate A First Aid", "Section B2 Medical Centre", "Section D1 First Aid", "Pitch-side Medical"],
-      "services": ["First aid", "Emergency care", "Medication storage", "Defibrillators at every gate"],
+      "locations": [
+        "Gate A First Aid",
+        "Section B2 Medical Centre",
+        "Section D1 First Aid",
+        "Pitch-side Medical"
+      ],
+      "services": [
+        "First aid",
+        "Emergency care",
+        "Medication storage",
+        "Defibrillators at every gate"
+      ],
       "emergency": "Call 911 or use red emergency intercom at any gate"
     },
     "transportation": {

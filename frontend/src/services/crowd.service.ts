@@ -1,6 +1,6 @@
 // StadiumGPT — Crowd service (frontend)
-import { getCrowd } from '@/lib/api';
-import { CrowdResponse } from '@/types';
+import { getCrowd } from "@/lib/api";
+import { CrowdResponse } from "@/types";
 
 export interface GetCrowdParams {
   stadium_id?: string;

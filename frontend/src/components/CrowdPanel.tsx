@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { CrowdZone, CrowdLevel } from '@/types';
-import { getCrowd } from '@/lib/api';
+import { useState, useCallback, useEffect, useRef } from "react";
+import { CrowdZone, CrowdLevel } from "@/types";
+import { getCrowd } from "@/lib/api";
 
 interface CrowdPanelProps {
   stadiumId: string;
@@ -10,28 +10,54 @@ interface CrowdPanelProps {
 }
 
 const LEVEL_ICON: Record<CrowdLevel, string> = {
-  low: '🟢', moderate: '🟡', high: '🔴', critical: '🔴',
+  low: "🟢",
+  moderate: "🟡",
+  high: "🔴",
+  critical: "🔴",
 };
 
 const REFRESH_INTERVAL = 15; // seconds
 
-const I18N: Record<string, {
-  title: string;
-  refresh: string;
-  loading: string;
-  updateLabel: string;
-}> = {
-  en: { title: 'Live Crowd', refresh: 'Refresh Now', loading: 'Loading…', updateLabel: 'Updates in' },
-  es: { title: 'Multitud en Vivo', refresh: 'Actualizar Ahora', loading: 'Cargando…', updateLabel: 'Actualizaciones en' },
-  fr: { title: 'Foule en Direct', refresh: 'Rafraîchir Maintenant', loading: 'Chargement…', updateLabel: 'Mises à jour dans' },
-  hi: { title: 'लाइव भीड़', refresh: 'अभी अपडेट करें', loading: 'लोड हो रहा है…', updateLabel: 'अपडेट समय' },
+const I18N: Record<
+  string,
+  {
+    title: string;
+    refresh: string;
+    loading: string;
+    updateLabel: string;
+  }
+> = {
+  en: {
+    title: "Live Crowd",
+    refresh: "Refresh Now",
+    loading: "Loading…",
+    updateLabel: "Updates in",
+  },
+  es: {
+    title: "Multitud en Vivo",
+    refresh: "Actualizar Ahora",
+    loading: "Cargando…",
+    updateLabel: "Actualizaciones en",
+  },
+  fr: {
+    title: "Foule en Direct",
+    refresh: "Rafraîchir Maintenant",
+    loading: "Chargement…",
+    updateLabel: "Mises à jour dans",
+  },
+  hi: {
+    title: "लाइव भीड़",
+    refresh: "अभी अपडेट करें",
+    loading: "लोड हो रहा है…",
+    updateLabel: "अपडेट समय",
+  },
 };
 
 export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
   const t = I18N[language] ?? I18N.en;
   const [zones, setZones] = useState<CrowdZone[]>([]);
-  const [overall, setOverall] = useState<CrowdLevel>('moderate');
-  const [summary, setSummary] = useState('');
+  const [overall, setOverall] = useState<CrowdLevel>("moderate");
+  const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
   const [countdown, setCountdown] = useState(REFRESH_INTERVAL);
   const timerRef = useRef<ReturnType<typeof setInterval>>(null);
@@ -52,7 +78,9 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
   }, [stadiumId]);
 
   // Initial fetch
-  useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
 
   // Auto-refresh countdown
   useEffect(() => {
@@ -65,7 +93,9 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
         return prev - 1;
       });
     }, 1000);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
   }, [refresh]);
 
   return (
@@ -74,8 +104,11 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
         <h2 id="crowd-heading" className="card__title">
           <span aria-hidden="true">📊</span> {t.title}
         </h2>
-        <span className="crowd-timer" aria-label={`${t.updateLabel} ${countdown} seconds`}>
-          {loading ? '⟳' : `${countdown}s`}
+        <span
+          className="crowd-timer"
+          aria-label={`${t.updateLabel} ${countdown} seconds`}
+        >
+          {loading ? "⟳" : `${countdown}s`}
         </span>
       </div>
 
@@ -94,7 +127,9 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
             <div key={z.zone} className="crowd-zone">
               <div className="crowd-zone__label">
                 <span>
-                  <span className="crowd-zone__icon" aria-hidden="true">{LEVEL_ICON[z.level]}</span>
+                  <span className="crowd-zone__icon" aria-hidden="true">
+                    {LEVEL_ICON[z.level]}
+                  </span>
                   {z.zone}
                 </span>
                 <span className="crowd-zone__pct">{z.occupancy_pct}%</span>
@@ -110,17 +145,13 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
                   aria-label={`${z.zone}: ${z.occupancy_pct}% occupancy`}
                 />
               </div>
-              {z.alert && (
-                <p className="crowd-zone__alert">⚠ {z.alert}</p>
-              )}
+              {z.alert && <p className="crowd-zone__alert">⚠ {z.alert}</p>}
             </div>
           ))}
         </div>
       )}
 
-      {summary && (
-        <p className="crowd-summary">{summary}</p>
-      )}
+      {summary && <p className="crowd-summary">{summary}</p>}
 
       <button
         className="btn btn--ghost btn--sm"
@@ -128,7 +159,7 @@ export default function CrowdPanel({ stadiumId, language }: CrowdPanelProps) {
         onClick={() => void refresh()}
         disabled={loading}
       >
-        <span aria-hidden="true">{loading ? '⟳' : '↻'}</span>{' '}
+        <span aria-hidden="true">{loading ? "⟳" : "↻"}</span>{" "}
         {loading ? t.loading : t.refresh}
       </button>
     </section>

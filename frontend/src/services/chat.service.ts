@@ -1,7 +1,7 @@
 // StadiumGPT — Chat service (frontend)
 // Wraps the raw API client with domain-level concerns
-import { sendChat } from '@/lib/api';
-import { ChatResponse, Language } from '@/types';
+import { sendChat } from "@/lib/api";
+import { ChatResponse, Language } from "@/types";
 
 export interface SendChatParams {
   message: string;

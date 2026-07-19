@@ -1,18 +1,18 @@
 // StadiumGPT — Shared TypeScript types for backend
 
-export type Language = 'en' | 'es' | 'fr' | 'hi';
+export type Language = "en" | "es" | "fr" | "hi";
 
 export type Intent =
-  | 'navigate'
-  | 'accessibility'
-  | 'crowd'
-  | 'facility'
-  | 'transport'
-  | 'emergency'
-  | 'sustainability'
-  | 'general';
+  | "navigate"
+  | "accessibility"
+  | "crowd"
+  | "facility"
+  | "transport"
+  | "emergency"
+  | "sustainability"
+  | "general";
 
-export type CrowdLevel = 'low' | 'moderate' | 'high' | 'critical';
+export type CrowdLevel = "low" | "moderate" | "high" | "critical";
 
 // ── Request schemas ────────────────────────────────────────────────────────
 
@@ -45,7 +45,7 @@ export interface ChatResponse {
   language: Language;
   accessibility_mode: boolean;
   suggested_actions: string[];
-  urgency: 'normal' | 'high' | 'emergency';
+  urgency: "normal" | "high" | "emergency";
 }
 
 export interface RouteStep {
@@ -86,5 +86,5 @@ export interface CrowdResponse {
 export interface ResolvedFact {
   intent: Intent;
   facts: Record<string, unknown>;
-  urgency?: 'normal' | 'high' | 'emergency';
+  urgency?: "normal" | "high" | "emergency";
 }

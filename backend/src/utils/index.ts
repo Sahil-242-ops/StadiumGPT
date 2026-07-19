@@ -13,10 +13,13 @@ export function envInt(key: string, fallback: number): number {
 /**
  * Extract a real client IP from behind a proxy
  */
-export function getClientIp(req: { headers: Record<string, string | string[] | undefined>; ip?: string }): string {
-  const forwarded = req.headers['x-forwarded-for'];
-  if (typeof forwarded === 'string') return forwarded.split(',')[0].trim();
-  return req.ip ?? 'unknown';
+export function getClientIp(req: {
+  headers: Record<string, string | string[] | undefined>;
+  ip?: string;
+}): string {
+  const forwarded = req.headers["x-forwarded-for"];
+  if (typeof forwarded === "string") return forwarded.split(",")[0].trim();
+  return req.ip ?? "unknown";
 }
 
 /**
@@ -31,12 +34,14 @@ export function sleep(ms: number): Promise<void> {
  */
 export function truncate(str: string, maxLen: number): string {
   if (str.length <= maxLen) return str;
-  return str.slice(0, maxLen - 3) + '…';
+  return str.slice(0, maxLen - 3) + "…";
 }
 
 /**
  * Check if a value is a non-empty string
  */
 export function isNonEmptyString(val: unknown): val is string {
-  return typeof val === 'string' && val.trim().length > 0;
+  return typeof val === "string" && val.trim().length > 0;
 }
+
+export { logger } from "./logger.js";

@@ -4,7 +4,7 @@
  * Generate a unique ID for messages or elements
  */
 let _counter = 0;
-export const uid = (prefix = 'id') => `${prefix}_${++_counter}_${Date.now()}`;
+export const uid = (prefix = "id") => `${prefix}_${++_counter}_${Date.now()}`;
 
 /**
  * Format crowd occupancy percentage for display
@@ -24,7 +24,7 @@ export function capitalise(str: string): string {
  * Format a Date as a human-readable time string (HH:MM)
  */
 export function formatTime(date: Date): string {
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 }
 
 /**
@@ -39,7 +39,7 @@ export function clamp(value: number, min: number, max: number): number {
  */
 export function debounce<T extends (...args: unknown[]) => void>(
   fn: T,
-  delayMs: number
+  delayMs: number,
 ): (...args: Parameters<T>) => void {
   let timer: ReturnType<typeof setTimeout>;
   return (...args) => {

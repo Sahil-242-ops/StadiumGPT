@@ -38,3 +38,5 @@ logs/
 npm-debug.log*
 
 .vercel
+*.tsbuildinfo
+

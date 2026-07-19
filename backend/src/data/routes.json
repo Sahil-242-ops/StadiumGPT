@@ -10,7 +10,11 @@
       ],
       "distance_metres": 180,
       "estimated_minutes": 4,
-      "landmarks": ["Blue information kiosk", "Accessible restroom on left", "Section A1 signage"]
+      "landmarks": [
+        "Blue information kiosk",
+        "Accessible restroom on left",
+        "Section A1 signage"
+      ]
     },
     "gate_A_to_section_B2": {
       "accessible": true,
@@ -23,7 +27,11 @@
       ],
       "distance_metres": 320,
       "estimated_minutes": 7,
-      "landmarks": ["Accessible ramp", "Concession Stand 7", "East Wing junction"]
+      "landmarks": [
+        "Accessible ramp",
+        "Concession Stand 7",
+        "East Wing junction"
+      ]
     },
     "gate_D_to_accessible_seating": {
       "accessible": true,
@@ -58,7 +66,11 @@
       ],
       "distance_metres": 0,
       "estimated_minutes": 2,
-      "landmarks": ["Red cross signs", "Emergency intercom boxes", "Steward stations"]
+      "landmarks": [
+        "Red cross signs",
+        "Emergency intercom boxes",
+        "Steward stations"
+      ]
     }
   }
 }
