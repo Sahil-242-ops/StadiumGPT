@@ -40,11 +40,11 @@ The **deterministic engine** resolves all facts first (routes, crowd levels, fac
 
 ### Home Page
 
-![Home](Images/Screenshot.png)
+![Home](assests/Images/Screenshot.png)
 
 ### AI Chat
 
-![Chat](Images/chat.png)
+![Chat](assests/Images/chat.png)
 
 ---
 
